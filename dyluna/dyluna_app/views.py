@@ -6,6 +6,9 @@ from .forms.forms import DietForm
 
 from .models.models import *
 
+from .models.models import User
+from django.views.generic import TemplateView
+
 
 def index(request):
     return HttpResponse("Hello world!")
@@ -40,3 +43,34 @@ class DietListView(ListView):
 class DietDetailView(DetailView):
     model = Diet
     template_name = 'templates/detail_template.html'
+
+
+def main(request):
+    return render(request, 'main.html')
+
+
+def users(request):
+    return render(request, 'users.html', {
+        'users': User.objects.all()
+    })
+
+
+def users_students(request):
+    return render(request, 'menu_users_students.html', {
+        'users': User.objects.filter(user_role__role_name="UCZESTNIK")
+    })
+
+
+def users_teachers(request):
+    return render(request, 'menu_users_teachers.html', {
+        'users': User.objects.filter(user_role__role_name="KOORDYNATOR")
+    })
+
+
+def workshop(request):
+    return HttpResponse("Workshops")
+
+
+def workshop_schedule(request):
+    return HttpResponse("Workshop Schedules")
+
