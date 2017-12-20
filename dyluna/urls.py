@@ -23,6 +23,13 @@ from dyluna.dyluna_app import views
 
 urlpatterns = [
     url(r'^$', views.blank  ),
+
+    url(r'^user/new/$', views.user_new, name="user_new "),
+
+    url(r'^diet/new/$', views.diet_new, name="diet_new "),
+    # url(r'^diet/(?P<pk>\d+)$', views.DietDetailView.as_view(), name="diet_detail"),
+    # url(r'^diet/$', views.DietListView.as_view(), name="diets"),
+
     url(r'^index', views.index ),
 
     url(r'^admin', admin.site.urls, name='admin_panel'),
@@ -35,3 +42,5 @@ urlpatterns = [
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# TODO: Add function to generate urls to: new and displays - those are generics

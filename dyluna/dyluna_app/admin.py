@@ -19,29 +19,3 @@ for model in app_models:
         admin.site.register(model)
     except AlreadyRegistered:
         pass
-# class User(models.Model):
-#
-# class User_Role(models.Model):
-#
-#
-# class Diet(models.Model):
-#
-# class Workshop(models.Model):
-#
-# class Type(models.Model):
-#
-# class Workshop_Schedule(models.Model):
-#
-#
-# class Equipment(models.Model):
-#
-# class Place(models.Model):
-#
-#
-# class Meal(models.Model):
-#
-#
-# class Meal_Time(models.Model):
-#
-#
-# class Preferences(models.Model):

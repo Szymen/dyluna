@@ -1,0 +1,8 @@
+<h1>Diets</h1>
+<ul>
+{% for diet in object_list %}
+    <li>{{ diet.id }} - {{ diet.name }}</li>
+{% empty %}
+    <li>No diets yet.</li>
+{% endfor %}
+</ul>

@@ -55,7 +55,7 @@ ROOT_URLCONF = 'dyluna.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['dyluna'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

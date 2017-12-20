@@ -23,13 +23,13 @@ class Diet(models.Model):
 class Workshop(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
-    user = models.ForeignKey('User', on_delete="CASCADE")
+    user = models.ForeignKey('User', on_delete="CASCADE") # TODO: to jest prowadzący, zmienic nazwe odpowiednio
     type = models.ForeignKey('Type', on_delete="CASCADE")
     description = models.CharField(max_length=1000, blank=True)
     equipment = models.ForeignKey('Equipment', on_delete="CASCADE", null=True)
 
 
-class Type(models.Model):
+class Type(models.Model): # czego to Type? :D TODO: zmienic nazwe na Workshop_Type
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True)
