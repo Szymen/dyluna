@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.shortcuts import HttpResponse
-from .models.models import User
+from .models.models import User, Workshop
 from django.views.generic import TemplateView
 
 
@@ -35,7 +35,9 @@ def users_teachers(request):
 
 
 def workshop(request):
-    return HttpResponse("Workshops")
+    return render(request, 'workshop.html', {
+        'workshops': Workshop.objects.all()
+    })
 
 
 def workshop_schedule(request):

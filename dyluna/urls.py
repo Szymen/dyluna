@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^menu', views.users  ),
     url(r'^students', views.users_students  ),
     url(r'^teachers', views.users_teachers  ),
-    url(r'^menu/workshop', views.workshop  ),
+    url(r'^workshop', views.workshop  ),
     url(r'^menu/workshop_schedules', views.workshop_schedule  ),
 
 
