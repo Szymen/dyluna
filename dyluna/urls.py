@@ -22,7 +22,7 @@ from dyluna.dyluna_app import views
 
 
 urlpatterns = [
-    url(r'^', views.blank  ),
+    url(r'^$', views.blank  ),
     url(r'^index', views.index ),
 
     url(r'^admin', admin.site.urls, name='admin_panel'),
