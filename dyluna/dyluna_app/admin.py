@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import example_model
+from .models import models
 
 
 # login: admin
@@ -8,5 +8,5 @@ from .models import example_model
 
 # Register your models here.
 
-admin.site.register(example_model.przykladowa_osoba)
+admin.site.register(models.przykladowa_osoba)
 
