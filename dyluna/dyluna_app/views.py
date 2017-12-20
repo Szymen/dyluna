@@ -7,3 +7,5 @@ def index(request):
     return HttpResponse("Hello world!")
 
 
+def blank(request):
+    return HttpResponse("Welcome on blank page")
