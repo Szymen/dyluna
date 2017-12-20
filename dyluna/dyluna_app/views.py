@@ -24,26 +24,19 @@ def diet_new(request):
     if request.method == "POST":
         form = DietForm(request.POST)
         if form.is_valid():
-            diet = form.save(commit=False)
-            diet.name = form.name
-            diet.description = form.description
-            diet.save()
-            return redirect('diet_detail', id=diet.pk)
+            print(form)
+            diet = form.save()
+            return redirect('diet_detail', pk=diet.pk)
     else:
         form = DietForm()
     return render(request, 'templates/form_template.html', {'form': form})
 
 
-# def diet_detail(request, pk):
-#     diet = get_object_or_404(Diet,  id=pk)
-#     return render( request, 'templates/detail_template.html', {'data': diet})
-
-
 class DietListView(ListView):
     model = Diet
-    template_name = '../templates/list_template.html'
+    template_name = 'templates/list_template.html'
 
 
 class DietDetailView(DetailView):
     model = Diet
-    template_name = '../templates/detail_template.html'
+    template_name = 'templates/detail_template.html'
