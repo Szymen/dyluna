@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response, redirect, get_object_or
 from django.shortcuts import HttpResponse
 from django.views.generic import TemplateView, ListView, DetailView
 
-from .forms.forms import DietForm
+from .forms.forms import *
 
 from .models.models import *
 
@@ -18,31 +18,33 @@ def blank(request):
     return HttpResponse("Welcome on blank page")
 
 
-def diet_new(request):
-    form = DietForm()
-    return render(request, '../templates/form_template.html', {'form': form, 'name': 'diet'})
+# def diet_new(request):
+#     form = DietForm()
+#     return render(request, '../templates/form_template.html', {'form': form, 'name': 'diet'})
 
 
 def diet_new(request):
     if request.method == "POST":
         form = DietForm(request.POST)
         if form.is_valid():
-            print(form)
             diet = form.save()
-            return redirect('diet_detail', pk=diet.pk)
+            return HttpResponse("Nowa dieta utworzona <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
     else:
         form = DietForm()
-    return render(request, 'templates/form_template.html', {'form': form})
+    return render(request, 'templates/form_template.html', {'form': form, 'name':"diet"})
 
 
-class DietListView(ListView):
-    model = Diet
-    template_name = 'templates/list_template.html'
-
-
-class DietDetailView(DetailView):
-    model = Diet
-    template_name = 'templates/detail_template.html'
+def user_new(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return HttpResponse("Nowy użytkownik utworzony <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=user.pk)
+    else:
+        form = UserForm()
+    return render(request, 'templates/form_template.html', {'form': form, "name":"user"})
 
 
 def main(request):

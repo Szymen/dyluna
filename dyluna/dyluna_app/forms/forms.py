@@ -7,4 +7,13 @@ class DietForm(forms.ModelForm):
 
     class Meta:
         model = Diet
-        exclude = (id, )
+        exclude = ()
+        # exclude = (id, )
+
+
+class UserForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        # exclude = ( 'user_role', )
+        exclude = ()
