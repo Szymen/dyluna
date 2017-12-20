@@ -6,14 +6,11 @@ class User(models.Model):
     name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     diet = models.ForeignKey('Diet', on_delete="CASCADE")
+    user_role = models.ForeignKey('User_Role', on_delete="CASCADE")
 
 
 class User_Role(models.Model):
-    user = models.OneToOneField(
-        'User',
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
+    id = models.AutoField(primary_key=True)
     role_name = models.CharField(max_length=255)
 
 

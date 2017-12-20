@@ -26,6 +26,12 @@ urlpatterns = [
     url(r'^index', views.index ),
 
     url(r'^admin', admin.site.urls, name='admin_panel'),
+    url(r'^main', views.main  ),
+    url(r'^menu/users', views.users  ),
+    url(r'^menu/users/students', views.users_students  ),
+    url(r'^menu/users/teachers', views.users_teachers  ),
+    url(r'^menu/workshop', views.workshop  ),
+    url(r'^menu/workshop_schedules', views.workshop_schedule  ),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
