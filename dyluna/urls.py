@@ -25,9 +25,9 @@ from dyluna.dyluna_app import views
 urlpatterns = [
     url(r'^$', views.main ), #so just basically redirects
 
-    url(r'^register', views.register_user  ),
-    url(r'^user/new/$', views.user_new, name="user_new "),
+    url(r'^signup/$', views.signup, name='signup'),
 
+    url(r'^workshop/new/', views.new_workshop , name="new_workshop"),
     url(r'^diet/new/$', views.diet_new, name="diet_new "),
     # url(r'^diet/(?P<pk>\d+)$', views.DietDetailView.as_view(), name="diet_detail"),
     # url(r'^diet/$', views.DietListView.as_view(), name="diets"),

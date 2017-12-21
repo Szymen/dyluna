@@ -1,12 +1,12 @@
-from django.shortcuts import render, render_to_response
-from django.shortcuts import HttpResponse
+from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponse
 from django.views import View
 from .models.models import User, Workshop
-from .forms.forms import DietForm, UserForm, loginUserForm
-from django.shortcuts import get_object_or_404
-from django.views.generic import ListView
-from django.views.generic import TemplateView
+from .forms.forms import DietForm, UserForm, WorkshopForm
+from django.views.generic import ListView, TemplateView
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+
 
 from django.contrib.auth.decorators import login_required
 
@@ -14,14 +14,6 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return HttpResponse("Hello world!")
 
-
-def blank(request):
-    return HttpResponse("Welcome on blank page")
-
-
-# def diet_new(request):
-#     form = DietForm()
-#     return render(request, '../templates/form_template.html', {'form': form, 'name': 'diet'})
 
 @login_required
 def diet_new(request):
@@ -35,17 +27,6 @@ def diet_new(request):
         form = DietForm()
     return render(request, 'templates/form_template.html', {'form': form, 'name':"diet"})
 
-
-def user_new(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            return HttpResponse("Nowy użytkownik utworzony <a href='/main'>Wróc do menu głownego</a>")
-            # return redirect('diet_detail', pk=user.pk)
-    else:
-        form = UserForm()
-    return render(request, 'templates/form_template.html', {'form': form, "name":"user"})
 
 @login_required
 def main(request):
@@ -107,13 +88,29 @@ def workshop_schedule(request):
     return HttpResponse("Workshop Schedules")
 
 
-def register_user(request):
-    if request.method == "POST":
-        form = loginUserForm(request.POST)
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            loginUser = form.save()
-            return HttpResponse("Nowy login-użytkownik utworzony <a href='/main'>Wróc do menu głownego</a>")
-            # return redirect('diet_detail', pk=user.pk)
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('main')
     else:
-        form = loginUserForm()
-    return render(request, 'templates/form_template.html', {'form': form, "name":"login-user"})
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+@login_required
+def new_workshop(request):
+    if request.method == "POST":
+        form = WorkshopForm(request.POST)
+        if form.is_valid():
+            workshop = form.save()
+            return HttpResponse("Nowe zajęcia utworzone <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = WorkshopForm()
+    return render(request, 'templates/form_template.html', {'form': form, 'name':"Zajęcia"})

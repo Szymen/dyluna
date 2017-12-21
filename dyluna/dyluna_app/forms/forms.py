@@ -19,8 +19,8 @@ class UserForm(forms.ModelForm):
         exclude = ()
 
 
-class loginUserForm(forms.ModelForm):
+class WorkshopForm(forms.ModelForm):
 
     class Meta:
-        model = authUser
+        model = Workshop
         exclude = ()

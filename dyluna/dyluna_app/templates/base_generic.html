@@ -25,6 +25,15 @@
           <li><a href="{% url 'main' %}">Menu</a></li>
           <li><a href="">Link 1</a></li>
           <li><a href="">Link 2</a></li>
+
+          {% if user.is_authenticated %}
+              </br>
+            <p><b> {{ user.get_username }} </b></p>
+          <li>  <a href="{% url 'logout'%}?next={{request.path}}">Wyloguj</a></li>
+            {% else %}
+            <li><a href="{% url 'login'%}?next={{request.path}}"><b>Zaloguj</b></a></li>
+            <li><a href="{% url 'signup'%}?next={{request.path}}"><b>Zarejestruj się</b></a></li>
+         {% endif %}
       </ul>
      {% endblock %}
       </div>

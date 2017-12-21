@@ -36,7 +36,7 @@ class Workshop(models.Model):
     equipment = models.ForeignKey('Equipment', on_delete="CASCADE", null=True)
 
     def __str__(self):
-        return self.id + " " + self.name + " " + self.type
+        return "[{0}] {1} - {2}".format( str(self.id), self.name, str(self.type) )
 
 
 class Type(models.Model): # czego to Type? :D TODO: zmienic nazwe na Workshop_Type
@@ -98,3 +98,4 @@ class Preferences(models.Model):
 #
 #     class Meta:
 #         verbose_name_plural = "Obywatelki"
+
