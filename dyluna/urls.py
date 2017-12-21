@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from .dyluna_app.views import Users_Display
@@ -23,8 +23,9 @@ from dyluna.dyluna_app import views
 
 
 urlpatterns = [
-    url(r'^$', views.blank  ),
+    url(r'^$', views.main ), #so just basically redirects
 
+    url(r'^register', views.register_user  ),
     url(r'^user/new/$', views.user_new, name="user_new "),
 
     url(r'^diet/new/$', views.diet_new, name="diet_new "),
@@ -34,13 +35,14 @@ urlpatterns = [
     url(r'^index', views.index ),
 
     url(r'^admin', admin.site.urls, name='admin_panel'),
-    url(r'^main', views.main  ),
+    url(r'^main', views.main, name="main" ),
     url('menu', Users_Display.as_view()),
     url(r'^students', views.users_students  ),
     url(r'^teachers', views.users_teachers  ),
     url(r'^workshop', views.workshop  ),
     url(r'^menu/workshop_schedules', views.workshop_schedule  ),
 
+    url(r'^accounts/', include('django.contrib.auth.urls') )
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -5,8 +5,12 @@ class User(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    diet = models.ForeignKey('Diet', on_delete="CASCADE")
+    diet = models.ForeignKey('Diet', on_delete="CASCADE", null=True)
     user_role = models.ForeignKey('User_Role', on_delete="CASCADE")
+
+    def __str__(self):
+        return self.name + " " + self.last_name
+
 
 
 class User_Role(models.Model):
@@ -19,6 +23,9 @@ class Diet(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=1000, blank=True)
 
+    def __str__(self):
+        return self.name + " - " + "".join(self.description.split(" ")[0:7])
+
 
 class Workshop(models.Model):
     id = models.AutoField(primary_key=True)
@@ -28,12 +35,17 @@ class Workshop(models.Model):
     description = models.CharField(max_length=1000, blank=True)
     equipment = models.ForeignKey('Equipment', on_delete="CASCADE", null=True)
 
+    def __str__(self):
+        return self.id + " " + self.name + " " + self.type
+
 
 class Type(models.Model): # czego to Type? :D TODO: zmienic nazwe na Workshop_Type
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True)
 
+    def __str__(self):
+        return self.name + " - ".join(self.description.split(" ")[0:7])
 
 class Workshop_Schedule(models.Model):
     id = models.AutoField(primary_key=True)
@@ -47,6 +59,9 @@ class Equipment(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=1000, blank=True)
     quantity = models.IntegerField()
+
+    def __str__(self):
+        return self.name + " ".join(self.description.split(" ")[0:7])
 
 
 class Place(models.Model):
