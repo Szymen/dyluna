@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
+from .dyluna_app.views import Users_Display
 from django.conf.urls.static import static
 
 from dyluna.dyluna_app import views
@@ -34,7 +35,7 @@ urlpatterns = [
 
     url(r'^admin', admin.site.urls, name='admin_panel'),
     url(r'^main', views.main  ),
-    url(r'^menu', views.users  ),
+    url('menu', Users_Display.as_view()),
     url(r'^students', views.users_students  ),
     url(r'^teachers', views.users_teachers  ),
     url(r'^workshop', views.workshop  ),

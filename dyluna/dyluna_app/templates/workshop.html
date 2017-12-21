@@ -12,21 +12,16 @@
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div class="main">
     {% block main_layout %}
     <div class="container">
         <div class="jumbotron">
-            <h1>Dyluna</h1>
-            <p>Główne menu:</p>
+            <h2>Lista zajęć</h2>
             {% block menu %}
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li><a href="/menu">Wyświetl listę użytkowników</a></li>
-                    <li><a href="/workshop">Wyświetl listę zajęć</a></li>
-                    <li><a href="/menu/workshop_schedule">Wyświetl harmonogram zajęć</a></li>
-                    <li><a href="/user/new">Nowy użytkownik</a></li>
-                    <li><a href="/diet/new">Nowa dieta</a></li>
+                    <li class="active"><a href="/menu">Lista wszystkich uczestników</a></li>
+                    <li><a href="/main">Powrót do głównego menu</a></li>
                 </ul>
                 </div>
             </nav>
@@ -34,7 +29,36 @@
         </div>
     </div>
     {% endblock %}
-
-</div>
+    {% block table %}
+    <div class="container">
+    <h2>Lista zleceń</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Id zajęć</th>
+        <th>Nazwa zajęć</th>
+        <th>Imię prowadzącego</th>
+        <th>Nazwisko prowadzącego</th>
+        <th>Typ zajęć</th>
+        <th>Opis zajęć</th>
+        <th>Nazwa sprzętu</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for workshop in workshops %}
+        <tr>
+          <td>{{workshop.id}}</td>
+          <td>{{workshop.name}}</td>
+          <td>{{workshop.user.name}}</td>
+          <td>{{workshop.user.last_name}}</td>
+          <td>{{workshop.type.name}}</td>
+          <td>{{workshop.description}}</td>
+          <td>{{workshop.equipment.name}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    {% endblock %}
 </body>
 </html>
