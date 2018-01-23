@@ -18,4 +18,51 @@
     {% endfor %}
     <button type="submit">Zarejestruj się</button>
   </form>
+    <p id="strength-status">Moc haseł: ??</p>
+    <p id="validate-status">Zgodność haseł: ??</p>
+
+
+<script>
+    $(document).ready(function() {
+
+    $("#id_password2").keyup(validate);
+
+    $("#id_password1").keyup(strong_password);
+});
+
+
+function validate() {
+  var password1 = $("#id_password1").val();
+  var password2 = $("#id_password2").val();
+
+
+    if(password1 == password2) {
+       $("#validate-status").text("Zgodność haseł: OK");
+       $("#validate-status").css('color', 'green');
+    }
+    else {
+        $("#validate-status").text("Podane hasła nie są takie same.");
+        $("#validate-status").css('color', 'red');
+    }
+
+}
+function strong_password() {
+  var password1 = $("#id_password1").val();
+
+  if(password1.length < 8){
+       $("#strength-status").text("Hasło za krótkie!");
+       $("#strength-status").css('color', 'red');
+       return;
+  }
+  if ( /^\d+$/.test(password1) ) {
+      $("#strength-status").text("Hasło nie zawiera liter!");
+      $("#strength-status").css('color', 'red');
+        return;
+  }
+  $("#strength-status").text("Moc hasła: OK");
+  $("#strength-status").css('color', 'green');
+
+}
+
+</script>
 {% endblock %}

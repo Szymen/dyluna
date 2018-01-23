@@ -25,7 +25,7 @@ def diet_new(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = DietForm()
-    return render(request, 'templates/form_template.html', {'form': form, 'name':"diet"})
+    return render(request, 'templates/form_template.html', {'form': form, 'name': "diet"})
 
 
 @login_required
