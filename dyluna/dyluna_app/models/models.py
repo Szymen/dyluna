@@ -51,8 +51,7 @@ class Workshop_Schedule(models.Model):
     id = models.AutoField(primary_key=True)
     workshop = models.ForeignKey('Workshop', on_delete="CASCADE")
     time = models.DateTimeField()
-    place = models.ForeignKey('Place', on_delete="CASCADE")
-
+    places = models.ManyToManyField('Place')
 
 class Equipment(models.Model):
     id = models.AutoField(primary_key=True)
