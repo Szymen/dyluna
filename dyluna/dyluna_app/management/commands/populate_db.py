@@ -7,8 +7,8 @@ class Command(BaseCommand):
     help = 'Helper function to populate db with some values'
 
     def _create_user_roles(self):
-        mod_role = User_Role(role_name='moderator')
-        attendee_role = User_Role(role_name='attendee')
+        mod_role = User_Role(role_name='KOORDYNATOR')
+        attendee_role = User_Role(role_name='UCZESTNIK')
 
         mod_role.save()
         attendee_role.save()
@@ -21,44 +21,59 @@ class Command(BaseCommand):
         ichtiovege.save()
 
     def _create_users(self):
-        user1 = User(
+        User(
             name = "Stanislas",
             last_name='Baguette',
             diet_id = 1,  # foreign key
             user_role_id=1
-        )
+        ).save()
 
-        user2 = User(
+        User(
             name = "Tester",
             last_name='Testowy',
             diet_id = 2,  # foreign key
             user_role_id=2
-        )
+        ).save()
 
-        user1.save()
-        user2.save()
+        User(
+            name = "Adam",
+            last_name='Babacki',
+            diet_id = 2,  # foreign key
+            user_role_id=2
+        ).save()
+
+        User(
+            name = "Bartosz",
+            last_name='Cadowski',
+            diet_id = 2,  # foreign key
+            user_role_id=2
+        ).save()
 
 
     def _create_workshop_types(self):
-        manual_wk = Type( name = "manualne/majsterkowe", description='Zwiazane z nauka robienia czegos i robieniem tego w praktyce')
-        theory_wk = Type(name = "teoretyczne", description='Takie, na których lepiej wziąć notatnik, niż rękawice robocze')
+        Type( name = "manualne/majsterkowe",
+              description='Zwiazane z nauka robienia czegos i robieniem tego w praktyce').save()
+
+        Type(name = "teoretyczne", description='Takie, na których lepiej wziąć notatnik, niż rękawice robocze').save()
 
     def _create_equipment(self):
-        pass
+        Equipment(name='Siekiera', description="siekiera jaka jest każdy widzi", quantity=10).save()
+        Equipment(name='Mazaki', description="kolorowe, suchościeralne", quantity=50).save()
 
     def _create_workshops(self):
-        wk1 = Workshop(
+        Workshop(
             name = "szydełkowanie",
             user_id = 1,
             type_id = 1,
             description = 'Nauczymy sie szydełkować, zrobimy szalik!'
-        )
-        wk2 = Workshop(
+        ).save()
+
+        Workshop(
             name = "Całki",
             user_id = 2,
             type_id = 2,
             description = 'Pochodne, całki i różniczki. Wszystko co najlepsze!'
-        )
+        ).save()
 
 
     def _create_places(self):
