@@ -2,8 +2,7 @@ from django.contrib import admin
 from django.apps import apps
 from django.contrib.admin.sites import AlreadyRegistered
 
-from .models import models
-
+from .models import *
 
 # login: admin
 # pass : haslo123

@@ -1,8 +1,8 @@
 from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponse
 from django.views import View
-from .models.models import User, Workshop, Workshop_Schedule, Place, Meal_Time, Preferences
-from .forms.forms import DietForm, UserForm, WorkshopForm, WorkshopSchedulesForm, PreferencesForm, MealTimeForm, MealForm, PlaceForm, TypeForm, EquipmentForm
+from ..models import UserModel, WorkshopModel, Workshop_ScheduleModel, PlaceModel, Meal_TimeModel, PreferencesModel, MealModel
+from ..forms import DietForm, UserForm, WorkshopForm, WorkshopSchedulesForm, PreferencesForm, MealTimeForm, MealForm, PlaceForm, TypeForm, EquipmentForm
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -13,10 +13,6 @@ db_logger = logging.getLogger('db')
 
 
 from django.contrib.auth.decorators import login_required
-
-
-def index(request):
-    return HttpResponse("Hello world!")
 
 
 @login_required
@@ -49,7 +45,7 @@ class Users_Display(View):
 
     def get(self, request):
         return render(request, 'users.html', {
-        'users': User.objects.all()
+        'users': UserModel.objects.all()
         })
 
 
@@ -60,8 +56,8 @@ class Users_Filter_Display(ListView):
 
 
     def get_queryset(self):
-        self.user_role__role_name = get_object_or_404(User, name=self.kwargs['user_role'])
-        return User.objects.filter(user_role__role_name=self.user_role__role_name)
+        self.user_role__role_name = get_object_or_404(UserModel, name=self.kwargs['user_role'])
+        return UserModel.objects.filter(user_role__role_name=self.user_role__role_name)
 
     '''def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -79,13 +75,13 @@ class Users_Filter_Display(ListView):
 @login_required
 def users_students(request):
     return render(request, 'menu_users_students.html', {
-        'users': User.objects.filter(user_role__role_name="UCZESTNIK")
+        'users': UserModel.objects.filter(user_role__role_name="UCZESTNIK")
     })
 
 @login_required
 def users_teachers(request):
     return render(request, 'menu_users_teachers.html', {
-        'users': User.objects.filter(user_role__role_name="KOORDYNATOR")
+        'users': UserModel.objects.filter(user_role__role_name="KOORDYNATOR")
     })
 
 
@@ -96,16 +92,16 @@ def workshop(request):
     except Exception as e:
         db_logger.exception(e)
     return render(request, 'workshop.html', {
-        'workshops': Workshop.objects.all()
+        'workshops': WorkshopModel.objects.all()
     })
 
 @login_required
 def workshop_schedule(request):
     return render(request, 'workshop_schedule.html', {
-        'schedules': Workshop_Schedule.objects.raw('''SELECT sch.id, sch.workshop_time, sch.workshop_id, schpl.id, pl.name FROM dyluna_app_workshop_schedule_places AS schpl
+        'schedules': Workshop_ScheduleModel.objects.raw('''SELECT sch.id, sch.workshop_time, sch.workshop_id, schpl.id, pl.name FROM dyluna_app_workshop_schedule_places AS schpl
 INNER JOIN dyluna_app_workshop_schedule AS sch ON sch.id = schpl.workshop_schedule_id 
 INNER JOIN dyluna_app_place AS pl ON schpl.id = pl.id'''),
-        'places': Place.objects.raw('''SELECT sch.id, sch.workshop_time, sch.workshop_id, schpl.id, pl.name FROM dyluna_app_workshop_schedule_places AS schpl
+        'places': PlaceModel.objects.raw('''SELECT sch.id, sch.workshop_time, sch.workshop_id, schpl.id, pl.name FROM dyluna_app_workshop_schedule_places AS schpl
 INNER JOIN dyluna_app_workshop_schedule AS sch ON sch.id = schpl.workshop_schedule_id 
 INNER JOIN dyluna_app_place AS pl ON schpl.id = pl.id''')
     })
@@ -113,19 +109,19 @@ INNER JOIN dyluna_app_place AS pl ON schpl.id = pl.id''')
 @login_required
 def meal(request):
     return render(request, 'meal.html', {
-        'meals': Meal_Time.objects.all()
+        'meals': Meal_TimeModel.objects.all()
     })
 
 @login_required
 def place(request):
     return render(request, 'places.html', {
-        'places': Place.objects.all()
+        'places': PlaceModel.objects.all()
     })
 
 @login_required
 def preference(request):
     return render(request, 'preferences.html', {
-        'preferences': Preferences.objects.all()
+        'preferences': PreferencesModel.objects.all()
     })
 
 def signup(request):
@@ -153,7 +149,7 @@ def new_workshop(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = WorkshopForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Zajęcia"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Zajęcia"})
 
 
 @login_required
@@ -166,7 +162,7 @@ def new_user(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = UserForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Uczestnika"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Uczestnika"})
 
 
 @login_required
@@ -179,7 +175,7 @@ def new_diet(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = DietForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Dietę"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Dietę"})
 
 
 @login_required
@@ -192,7 +188,7 @@ def new_workshop_schedule(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = WorkshopSchedulesForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Harmonogram"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Harmonogram"})
 
 
 @login_required
@@ -205,7 +201,7 @@ def new_preferences(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = PreferencesForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Preferencje"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Preferencje"})
 
 
 @login_required
@@ -218,7 +214,7 @@ def new_meal(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = MealForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Posiłek"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Posiłek"})
 
 
 @login_required
@@ -231,7 +227,7 @@ def new_meal_time(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = MealTimeForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Czas posiłku"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Czas posiłku"})
 
 
 @login_required
@@ -244,7 +240,7 @@ def new_type(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = TypeForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Typ Zajęć"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Typ Zajęć"})
 
 
 @login_required
@@ -257,7 +253,7 @@ def new_place(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = PlaceForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Miejsce"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Miejsce"})
 
 
 
@@ -271,4 +267,4 @@ def new_equipment(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = EquipmentForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Wyposażenie"})
+    return render(request, 'form_template.html', {'form': form, 'name': "Wyposażenie"})
