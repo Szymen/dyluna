@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponse
 from django.views import View
-from .models.models import User, Workshop, Workshop_Schedule
+from .models.models import User, Workshop, Workshop_Schedule, Place, Meal_Time
 from .forms.forms import DietForm, UserForm, WorkshopForm
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth import login, authenticate
@@ -97,21 +97,20 @@ def workshop(request):
 
 @login_required
 def workshop_schedule(request):
-    print (Workshop_Schedule.objects.all())
-    db = MySQLdb.connect(host="localhost", user="dyluna",
-                        passwd="haslo123", db="dyluna")
-    cr = db.cursor()
-    data = cr.execute('''SELECT sch.id, sch.workshop_time, sch.workshop_id, pl.name FROM dyluna_app_workshop_schedule AS sch 
-        INNER JOIN dyluna_app_workshop_schedule_places AS schpl ON sch.id = schpl.workshop_schedule_id 
-        INNER JOIN dyluna_app_place AS pl ON schpl.id = pl.id''')
-    #data = cr.fetchall()
-    print ("NANANANANANANANANANANANANANA\n\n\n\n\n")
-    print (data)
-    #print (data)
     return render(request, 'workshop_schedule.html', {
-        'schedules': data
+        'schedules': Workshop_Schedule.objects.raw('''SELECT sch.id, sch.workshop_time, sch.workshop_id, schpl.id, pl.name FROM dyluna_app_workshop_schedule_places AS schpl
+INNER JOIN dyluna_app_workshop_schedule AS sch ON sch.id = schpl.workshop_schedule_id 
+INNER JOIN dyluna_app_place AS pl ON schpl.id = pl.id'''),
+        'places': Place.objects.raw('''SELECT sch.id, sch.workshop_time, sch.workshop_id, schpl.id, pl.name FROM dyluna_app_workshop_schedule_places AS schpl
+INNER JOIN dyluna_app_workshop_schedule AS sch ON sch.id = schpl.workshop_schedule_id 
+INNER JOIN dyluna_app_place AS pl ON schpl.id = pl.id''')
     })
 
+@login_required
+def meal(request):
+    return render(request, 'meal.html', {
+        'meals': Meal_Time.objects.all()
+    })
 
 def signup(request):
     if request.method == 'POST':

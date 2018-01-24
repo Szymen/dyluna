@@ -20,7 +20,7 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/schedules">Lista harmonogramów zajęć</a></li>
+                    <li class="active"><a href="/meals">Lista wszystkich posiłków</a></li>
                     <li><a href="/list">Powrót do spisu</a></li>
                 </ul>
                 </div>
@@ -35,22 +35,17 @@
     <table class="table">
       <thead>
       <tr>
-        <th>Id harmonogramu</th>
-        <th>Nazwa zajęć</th>
-        <th>Czas zajęć</th>
-        <th>Nazwa miejsca</th>
+        <th>Id posiłku</th>
+        <th>Menu posiłku</th>
+        <th>Czas posiłku</th>
       </tr>
       </thead>
       <tbody>
-      {% for schedule in schedules %}
+      {% for meal in meals %}
         <tr>
-          <td>{{schedule.id}}</td>
-          <td>{{schedule.workshop.name}}</td>
-          <td>{{schedule.workshop_time}}</td>
-            <td>{% for place in places %}
-                {{place.name}}<br />
-            {% endfor %}
-            </td>
+          <td>{{meal.meal.id}}</td>
+          <td>{{meal.meal.menu}}</td>
+          <td>{{meal.meal_time}}</td>
         </tr>
       {% endfor %}
       </tbody>

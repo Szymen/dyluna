@@ -42,6 +42,7 @@ urlpatterns = [
     url(r'^teachers', views.users_teachers  ),
     url(r'^workshop', views.workshop  ),
     url('schedules', views.workshop_schedule  ),
+    url(r'^meals', views.meal  ),
 
     url(r'^accounts/', include('django.contrib.auth.urls') )
 
