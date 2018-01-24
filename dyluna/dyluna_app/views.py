@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response, get_object_or_404, Http
 from django.http import HttpResponse
 from django.views import View
 from .models.models import User, Workshop, Workshop_Schedule, Place, Meal_Time, Preferences
-from .forms.forms import DietForm, UserForm, WorkshopForm
+from .forms.forms import DietForm, UserForm, WorkshopForm, WorkshopSchedulesForm, PreferencesForm, MealTimeForm, MealForm, PlaceForm, TypeForm
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -39,6 +39,10 @@ def main(request):
 @login_required
 def list(request):
     return render(request, 'list_template.html')
+
+@login_required
+def new_things(request):
+    return render(request, 'new_things.html')
 
 
 class Users_Display(View):
@@ -150,3 +154,55 @@ def new_workshop(request):
     else:
         form = WorkshopForm()
     return render(request, 'form_template.html', {'form': form, 'name':"Zajęcia"})
+
+
+@login_required
+def new_user(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return HttpResponse("Nowy uczestnik utworzony <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = UserForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Uczestnika"})
+
+
+@login_required
+def new_diet(request):
+    if request.method == "POST":
+        form = DietForm(request.POST)
+        if form.is_valid():
+            diet = form.save()
+            return HttpResponse("Nowa dieta utworzona <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = DietForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Dietę"})
+
+
+@login_required
+def new_workshop_schedule(request):
+    if request.method == "POST":
+        form = WorkshopSchedulesForm(request.POST)
+        if form.is_valid():
+            workshop_schedule = form.save()
+            return HttpResponse("Nowy harmonoram utworzony <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = WorkshopSchedulesForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Harmonogram"})
+
+
+@login_required
+def new_workshop_schedule(request):
+    if request.method == "POST":
+        form = WorkshopSchedulesForm(request.POST)
+        if form.is_valid():
+            workshop_schedule = form.save()
+            return HttpResponse("Nowy harmonoram utworzony <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = WorkshopSchedulesForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Harmonogram"})

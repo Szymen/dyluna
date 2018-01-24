@@ -1,13 +1,19 @@
 {% extends "users.html" %}
-{% block menu %}
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li><a href="/main">Powrót do głównego menu</a></li>
-            </ul>
+{% block main_layout %}
+    <div class="container">
+        <div class="jumbotron">
+            {% block menu %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'new_things'%}">Powrót</a></li>
+                    </ul>
+                </div>
+            </nav>
+            {% endblock menu %}
         </div>
-    </nav>
-{% endblock menu %}
+    </div>
+{% endblock %}
 {{ data }}{% block table %}
     <div class="container">
     <h1>Dodaj {{ name }}</h1>

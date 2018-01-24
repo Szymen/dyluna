@@ -28,7 +28,10 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
 
     url(r'^workshop/new/', views.new_workshop , name="new_workshop"),
-    url(r'^diet/new/$', views.diet_new, name="diet_new "),
+    url(r'^new', views.new_things , name="new_things"),
+    url(r'^user/new', views.new_user , name="new_user"),
+    url(r'^diet/new', views.new_diet, name="new_diet"),
+    url(r'^diet/new', views.new_diet, name="new_diet"),
     # url(r'^diet/(?P<pk>\d+)$', views.DietDetailView.as_view(), name="diet_detail"),
     # url(r'^diet/$', views.DietListView.as_view(), name="diets"),
 
