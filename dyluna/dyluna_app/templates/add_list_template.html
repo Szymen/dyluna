@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    {% block main_layout %}
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Spis list:</h2>
+            {% block menu %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><a href="/signup">Dodaj użytkownika</a></li>
+                    <li><a href="/workshop/add">Dodaj zajęcia</a></li>
+                    <li><a href="/schedules/add">Wyświetl harmonogramy zajęć</a></li>
+                    <li><a href="/meals/add">Dodaj posiłek</a></li>
+                    <li><a href="/places/add">Dodaj miejscę</a></li>
+                    <li><a href="/preferences/add">Dodaj preferencje użytkownika</a></li>
+                    <li><a href="/main">Powrót do głównego menu</a></li>
+                </ul>
+                </div>
+            </nav>
+            {% endblock menu %}
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

@@ -25,6 +25,8 @@ from dyluna.dyluna_app import views
 urlpatterns = [
     url(r'^$', views.main ), #so just basically redirects
 
+    url(r'^add_list', views.add_list, name='add_list'),
+
     url(r'^signup/$', views.signup, name='signup'),
 
     url(r'^workshop/new/', views.new_workshop , name="new_workshop"),
@@ -40,6 +42,8 @@ urlpatterns = [
     url(r'^admin', admin.site.urls, name='admin_panel'),
     url(r'^main', views.main, name="main" ),
     url('list', views.list, name='list'),
+
+
     url('menu', Users_Display.as_view()),
     url(r'^students', views.users_students),
     url(r'^teachers', views.users_teachers),
