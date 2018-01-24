@@ -1,3 +1,5 @@
+
+
 from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponse
 from django.views import View
@@ -16,26 +18,14 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def diet_new(request):
+def new_meal_time(request):
     if request.method == "POST":
-        form = DietForm(request.POST)
+        form = MealTimeForm(request.POST)
         if form.is_valid():
-            diet = form.save()
-            return HttpResponse("Nowa dieta utworzona <a href='/main'>Wróc do menu głownego</a>")
+            meal_time = form.save()
+            return HttpResponse("Nowy posiłek utworzony <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = DietForm()
-    return render(request, 'templates/form_template.html', {'form': form, 'name': "diet"})
+        form = MealTimeForm()
+    return render(request, 'form_template.html', {'form': form, 'name': "Czas posiłku"})
 
-
-@login_required
-def new_diet(request):
-    if request.method == "POST":
-        form = DietForm(request.POST)
-        if form.is_valid():
-            diet = form.save()
-            return HttpResponse("Nowa dieta utworzona <a href='/main'>Wróc do menu głownego</a>")
-            # return redirect('diet_detail', pk=diet.pk)
-    else:
-        form = DietForm()
-    return render(request, 'form_template.html', {'form': form, 'name': "Dietę"})

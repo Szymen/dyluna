@@ -19,46 +19,59 @@ from django.conf import settings
 from .dyluna_app.views import views_handler
 from django.conf.urls.static import static
 
-from dyluna.dyluna_app import views
-from dyluna.dyluna_app.views import BaseView
+
+from dyluna.dyluna_app.views import MenuView
+from dyluna.dyluna_app.views import WorkshopView
+from dyluna.dyluna_app.views import UserView
+from dyluna.dyluna_app.views import Workshop_scheduleView
+from dyluna.dyluna_app.views import PreferencesView
+from dyluna.dyluna_app.views import MealView
+from dyluna.dyluna_app.views import Meal_timeView
+from dyluna.dyluna_app.views import TypeView
+from dyluna.dyluna_app.views import PlaceView
+from dyluna.dyluna_app.views import EquipmentView
+from dyluna.dyluna_app.views import DietView
+
 
 urlpatterns = [
-    url(r'^$', BaseView.index), #so just basically redirects
 
-    # url(r'^signup/$', views.signup, name='signup'),
-    #
-    # url(r'^workshop/new/', views.new_workshop , name="new_workshop"),
-    # url(r'^new', views.new_things , name="new_things"),
-    # url(r'^user/new', views.new_user , name="new_user"),
-    # url(r'^diet/new', views.new_diet, name="new_diet"),
-    # url(r'^workshop_schedule/new', views.new_workshop_schedule, name="new_workshop_schedule"),
-    # url(r'^preferences/new', views.new_preferences, name="new_preferences"),
-    # url(r'^meal/new', views.new_meal, name="new_meal"),
-    # url(r'^meal_time/new', views.new_meal_time, name="new_meal_time"),
-    # url(r'^type/new', views.new_type, name="new_type"),
-    # url(r'^place/new', views.new_place, name="new_place"),
-    # url(r'^equipment/new', views.new_equipment, name="new_equipment"),
-    #
-    # # url(r'^diet/(?P<pk>\d+)$', views.DietDetailView.as_view(), name="diet_detail"),
-    # # url(r'^diet/$', views.DietListView.as_view(), name="diets"),
-    #
-    # url(r'^index', views.index ),
-    #
-    # url(r'^admin', admin.site.urls, name='admin_panel'),
-    # url(r'^main', views.main, name="main" ),
-    # url('list', views.list, name='list'),
-    #
-    #
-    # url('menu', views_handler.Users_Display.as_view()),
-    # url(r'^students', views.users_students),
-    # url(r'^teachers', views.users_teachers),
-    # url(r'^workshop', views.workshop),
-    # url('schedules', views.workshop_schedule),
-    # url(r'^meals', views.meal),
-    # url(r'^places', views.place),
-    # url(r'^preferences', views.preference),
-    #
-    # url(r'^accounts/', include('django.contrib.auth.urls') )
+    url(r'^signup/$', MenuView.signup, name='signup'),
+    url(r'^info_about/$', MenuView.info_about, name='info_about'),
+
+    url(r'^workshop/new/', WorkshopView.new_workshop , name="new_workshop"),
+    url(r'^new', MenuView.new_things , name="new_things"),
+    url(r'^user/new', UserView.new_user , name="new_user"),
+    url(r'^diet/new', DietView.new_diet, name="new_diet"),
+    url(r'^workshop_schedule/new', Workshop_scheduleView.new_workshop_schedule, name="new_workshop_schedule"),
+    url(r'^preferences/new', PreferencesView.new_preferences, name="new_preferences"),
+    url(r'^meal/new', MealView.new_meal, name="new_meal"),
+    url(r'^meal_time/new', Meal_timeView.new_meal_time, name="new_meal_time"),
+    url(r'^type/new', TypeView.new_type, name="new_type"),
+    url(r'^place/new', PlaceView.new_place, name="new_place"),
+    url(r'^equipment/new', EquipmentView.new_equipment, name="new_equipment"),
+
+    # url(r'^diet/(?P<pk>\d+)$', views.DietDetailView.as_view(), name="diet_detail"),
+    # url(r'^diet/$', views.DietListView.as_view(), name="diets"),
+
+    url(r'^index', MenuView.index ),
+
+    url(r'^admin', admin.site.urls, name='admin_panel'),
+    url(r'^main', MenuView.main, name="main" ),
+    url('list', MenuView.list, name='list'),
+
+
+    url('menu', UserView.Users_Display.as_view()),
+    url(r'^students', UserView.users_students),
+    url(r'^teachers', UserView.users_teachers),
+    url(r'^workshop', WorkshopView.workshop),
+    url('schedules', Workshop_scheduleView.workshop_schedule),
+    url(r'^meals', MealView.meal),
+    url(r'^places', PlaceView.place),
+    url(r'^preferences', PreferencesView.preference),
+
+    url(r'^accounts/', include('django.contrib.auth.urls') ),
+
+    url(r'^$', MenuView.index),  # so just basically redirects
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

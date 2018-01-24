@@ -15,3 +15,5 @@ class Workshop(models.Model):
     def __str__(self):
         return "[{0}] {1} - {2}".format( str(self.id), self.name, str(self.type) )
 
+    def is_valid(self):
+        return True
