@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response, get_object_or_404, Http
 from django.http import HttpResponse
 from django.views import View
 from .models.models import User, Workshop, Workshop_Schedule, Place, Meal_Time, Preferences
-from .forms.forms import DietForm, UserForm, WorkshopForm, WorkshopSchedulesForm, PreferencesForm, MealTimeForm, MealForm, PlaceForm, TypeForm
+from .forms.forms import DietForm, UserForm, WorkshopForm, WorkshopSchedulesForm, PreferencesForm, MealTimeForm, MealForm, PlaceForm, TypeForm, EquipmentForm
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -258,3 +258,17 @@ def new_place(request):
     else:
         form = PlaceForm()
     return render(request, 'form_template.html', {'form': form, 'name':"Miejsce"})
+
+
+
+@login_required
+def new_equipment(request):
+    if request.method == "POST":
+        form = EquipmentForm(request.POST)
+        if form.is_valid():
+            equipment = form.save()
+            return HttpResponse("Nowe wyposażenie utworzone <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = EquipmentForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Wyposażenie"})

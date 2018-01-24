@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^meal_time/new', views.new_meal_time, name="new_meal_time"),
     url(r'^type/new', views.new_type, name="new_type"),
     url(r'^place/new', views.new_place, name="new_place"),
+    url(r'^equipment/new', views.new_equipment, name="new_equipment"),
 
     # url(r'^diet/(?P<pk>\d+)$', views.DietDetailView.as_view(), name="diet_detail"),
     # url(r'^diet/$', views.DietListView.as_view(), name="diets"),
