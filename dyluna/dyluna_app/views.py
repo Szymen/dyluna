@@ -40,6 +40,9 @@ def main(request):
 def list(request):
     return render(request, 'list_template.html')
 
+@login_required
+def add_list(request):
+    return render(request, 'add_list_template.html')
 
 class Users_Display(View):
 
