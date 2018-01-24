@@ -38,11 +38,13 @@ urlpatterns = [
     url(r'^main', views.main, name="main" ),
     url('list', views.list, name='list'),
     url('menu', Users_Display.as_view()),
-    url(r'^students', views.users_students  ),
-    url(r'^teachers', views.users_teachers  ),
-    url(r'^workshop', views.workshop  ),
-    url('schedules', views.workshop_schedule  ),
-    url(r'^meals', views.meal  ),
+    url(r'^students', views.users_students),
+    url(r'^teachers', views.users_teachers),
+    url(r'^workshop', views.workshop),
+    url('schedules', views.workshop_schedule),
+    url(r'^meals', views.meal),
+    url(r'^places', views.place),
+    url(r'^preferences', views.preference),
 
     url(r'^accounts/', include('django.contrib.auth.urls') )
 

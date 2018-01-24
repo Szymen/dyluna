@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponse
 from django.views import View
-from .models.models import User, Workshop, Workshop_Schedule, Place, Meal_Time
+from .models.models import User, Workshop, Workshop_Schedule, Place, Meal_Time, Preferences
 from .forms.forms import DietForm, UserForm, WorkshopForm
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth import login, authenticate
@@ -110,6 +110,18 @@ INNER JOIN dyluna_app_place AS pl ON schpl.id = pl.id''')
 def meal(request):
     return render(request, 'meal.html', {
         'meals': Meal_Time.objects.all()
+    })
+
+@login_required
+def place(request):
+    return render(request, 'places.html', {
+        'places': Place.objects.all()
+    })
+
+@login_required
+def preference(request):
+    return render(request, 'preferences.html', {
+        'preferences': Preferences.objects.all()
     })
 
 def signup(request):

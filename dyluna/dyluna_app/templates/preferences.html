@@ -15,12 +15,12 @@
     {% block main_layout %}
     <div class="container">
         <div class="jumbotron">
-            <h2>Lista posiłków</h2>
+            <h2>Lista preferencji użytkowników</h2>
             {% block menu %}
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/meals">Lista wszystkich posiłków</a></li>
+                    <li class="active"><a href="/preferences">Lista preferencji użytkowników</a></li>
                     <li><a href="/list">Powrót do spisu</a></li>
                 </ul>
                 </div>
@@ -35,17 +35,19 @@
     <table class="table">
       <thead>
       <tr>
-        <th>Id posiłku</th>
-        <th>Menu posiłku</th>
-        <th>Czas posiłku</th>
+        <th>Id zajęć</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Nazwa zajęć</th>
       </tr>
       </thead>
       <tbody>
-      {% for meal in meals %}
+      {% for preference in preferences %}
         <tr>
-          <td>{{meal.meal.id}}</td>
-          <td>{{meal.meal.menu}}</td>
-          <td>{{meal.meal_time}}</td>
+          <td>{{preference.id}}</td>
+          <td>{{preference.user.name}}</td>
+          <td>{{preference.user.last_name}}</td>
+          <td>{{preference.workshop.name}}</td>
         </tr>
       {% endfor %}
       </tbody>
