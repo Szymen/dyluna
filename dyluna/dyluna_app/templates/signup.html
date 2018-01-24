@@ -1,14 +1,20 @@
 {% extends 'users.html' %}
-
-{% block menu %}
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li><a href="/main">Powrót do głównego menu</a></li>
-            </ul>
+{% block main_layout %}
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Dodaj nowego użytkownika</h2>
+            {% block menu %}
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/main">Powrót do głównego menu</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            {% endblock menu %}
         </div>
-    </nav>
-{% endblock menu %}
+    </div>
+{% endblock %}
 
 {% block table %}
   <div class="container">
