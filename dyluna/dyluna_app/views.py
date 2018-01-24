@@ -196,13 +196,65 @@ def new_workshop_schedule(request):
 
 
 @login_required
-def new_workshop_schedule(request):
+def new_preferences(request):
     if request.method == "POST":
-        form = WorkshopSchedulesForm(request.POST)
+        form = PreferencesForm(request.POST)
         if form.is_valid():
-            workshop_schedule = form.save()
-            return HttpResponse("Nowy harmonoram utworzony <a href='/main'>Wróc do menu głownego</a>")
+            preference = form.save()
+            return HttpResponse("Nowe preferencje utworzone <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = WorkshopSchedulesForm()
-    return render(request, 'form_template.html', {'form': form, 'name':"Harmonogram"})
+        form = PreferencesForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Preferencje"})
+
+
+@login_required
+def new_meal(request):
+    if request.method == "POST":
+        form = MealForm(request.POST)
+        if form.is_valid():
+            meal = form.save()
+            return HttpResponse("Nowy posiłek utworzony <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = MealForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Posiłek"})
+
+
+@login_required
+def new_meal_time(request):
+    if request.method == "POST":
+        form = MealTimeForm(request.POST)
+        if form.is_valid():
+            meal_time = form.save()
+            return HttpResponse("Nowy posiłek utworzony <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = MealTimeForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Czas posiłku"})
+
+
+@login_required
+def new_type(request):
+    if request.method == "POST":
+        form = TypeForm(request.POST)
+        if form.is_valid():
+            type = form.save()
+            return HttpResponse("Nowy typ zajęć utworzony <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = TypeForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Typ Zajęć"})
+
+
+@login_required
+def new_place(request):
+    if request.method == "POST":
+        form = PlaceForm(request.POST)
+        if form.is_valid():
+            place = form.save()
+            return HttpResponse("Nowe miejsce utworzone <a href='/main'>Wróc do menu głownego</a>")
+            # return redirect('diet_detail', pk=diet.pk)
+    else:
+        form = PlaceForm()
+    return render(request, 'form_template.html', {'form': form, 'name':"Miejsce"})

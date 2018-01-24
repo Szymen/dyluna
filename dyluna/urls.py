@@ -25,15 +25,19 @@ from dyluna.dyluna_app import views
 urlpatterns = [
     url(r'^$', views.main ), #so just basically redirects
 
-    url(r'^add_list', views.add_list, name='add_list'),
-
     url(r'^signup/$', views.signup, name='signup'),
 
     url(r'^workshop/new/', views.new_workshop , name="new_workshop"),
     url(r'^new', views.new_things , name="new_things"),
     url(r'^user/new', views.new_user , name="new_user"),
     url(r'^diet/new', views.new_diet, name="new_diet"),
-    url(r'^diet/new', views.new_diet, name="new_diet"),
+    url(r'^workshop_schedule/new', views.new_workshop_schedule, name="new_workshop_schedule"),
+    url(r'^preferences/new', views.new_preferences, name="new_preferences"),
+    url(r'^meal/new', views.new_meal, name="new_meal"),
+    url(r'^meal_time/new', views.new_meal_time, name="new_meal_time"),
+    url(r'^type/new', views.new_type, name="new_type"),
+    url(r'^place/new', views.new_place, name="new_place"),
+
     # url(r'^diet/(?P<pk>\d+)$', views.DietDetailView.as_view(), name="diet_detail"),
     # url(r'^diet/$', views.DietListView.as_view(), name="diets"),
 
