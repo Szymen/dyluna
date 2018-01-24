@@ -27,12 +27,12 @@ def place(request):
 @login_required
 def new_place(request):
     if request.method == "POST":
-        form = PlaceForm(request.POST)
+        form = PlaceForm.PlaceForm(request.POST)
         if form.is_valid():
             place = form.save()
             return HttpResponse("Nowe miejsce utworzone <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = PlaceForm()
+        form = PlaceForm.PlaceForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Miejsce"})
 

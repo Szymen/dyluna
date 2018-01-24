@@ -67,11 +67,11 @@ def users_teachers(request):
 @login_required
 def new_user(request):
     if request.method == "POST":
-        form = UserForm.User(request.POST)
+        form = UserForm.UserForm(request.POST)
         if form.is_valid():
             user = form.save()
             return HttpResponse("Nowy uczestnik utworzony <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = UserForm.User()
+        form = UserForm.UserForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Uczestnika"})

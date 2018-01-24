@@ -25,11 +25,11 @@ def meal(request):
 @login_required
 def new_meal(request):
     if request.method == "POST":
-        form = MealForm(request.POST)
+        form = MealForm.MealForm(request.POST)
         if form.is_valid():
             meal = form.save()
             return HttpResponse("Nowy posiłek utworzony <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = MealForm()
+        form = MealForm.MealForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Posiłek"})

@@ -29,11 +29,12 @@ def workshop(request):
 @login_required
 def new_workshop(request):
     if request.method == "POST":
-        form = WorkshopForm.Workshop(request.POST)
+        form = WorkshopForm.WorkshopForm(request.POST)
         if form.is_valid():
+            print(form)
             workshop = form.save()
             return HttpResponse("Nowe zajęcia utworzone <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = WorkshopForm.Workshop()
+        form = WorkshopForm.WorkshopForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Zajęcia"})

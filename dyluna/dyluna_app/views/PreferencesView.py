@@ -19,13 +19,13 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def new_preferences(request):
     if request.method == "POST":
-        form = PreferencesForm(request.POST)
+        form = PreferencesForm.PreferencesForm(request.POST)
         if form.is_valid():
             preference = form.save()
             return HttpResponse("Nowe preferencje utworzone <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = PreferencesForm()
+        form = PreferencesForm.PreferencesForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Preferencje"})
 
 

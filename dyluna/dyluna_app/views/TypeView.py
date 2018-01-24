@@ -21,11 +21,11 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def new_type(request):
     if request.method == "POST":
-        form = TypeForm(request.POST)
+        form = TypeForm.TypeForm(request.POST)
         if form.is_valid():
             type = form.save()
             return HttpResponse("Nowy typ zajęć utworzony <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = TypeForm()
+        form = TypeForm.TypeForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Typ Zajęć"})

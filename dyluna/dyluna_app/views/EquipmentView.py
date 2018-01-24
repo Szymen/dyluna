@@ -21,11 +21,11 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def new_equipment(request):
     if request.method == "POST":
-        form = EquipmentForm(request.POST)
+        form = EquipmentForm.EquipmentForm(request.POST)
         if form.is_valid():
             equipment = form.save()
             return HttpResponse("Nowe wyposażenie utworzone <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = EquipmentForm()
+        form = EquipmentForm.EquipmentForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Wyposażenie"})

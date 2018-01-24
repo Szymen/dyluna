@@ -19,13 +19,13 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def new_workshop_schedule(request):
     if request.method == "POST":
-        form = WorkshopSchedulesForm(request.POST)
+        form = WorkshopSchedulesForm.WorkshopSchedulesForm(request.POST)
         if form.is_valid():
             workshop_schedule = form.save()
             return HttpResponse("Nowy harmonoram utworzony <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = WorkshopSchedulesForm()
+        form = WorkshopSchedulesForm.WorkshopSchedulesForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Harmonogram"})
 
 

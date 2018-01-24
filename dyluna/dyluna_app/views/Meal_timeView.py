@@ -20,12 +20,12 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def new_meal_time(request):
     if request.method == "POST":
-        form = MealTimeForm(request.POST)
+        form = MealTimeForm.MealTimeForm(request.POST)
         if form.is_valid():
             meal_time = form.save()
             return HttpResponse("Nowy posiłek utworzony <a href='/main'>Wróc do menu głownego</a>")
             # return redirect('diet_detail', pk=diet.pk)
     else:
-        form = MealTimeForm()
+        form = MealTimeForm.MealTimeForm()
     return render(request, 'form_template.html', {'form': form, 'name': "Czas posiłku"})
 

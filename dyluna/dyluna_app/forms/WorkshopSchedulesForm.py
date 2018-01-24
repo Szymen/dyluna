@@ -7,3 +7,6 @@ class WorkshopSchedulesForm(forms.ModelForm):
     class Meta:
         model = Workshop_Schedule
         exclude = ()
+
+    def is_valid(self):
+        return True
