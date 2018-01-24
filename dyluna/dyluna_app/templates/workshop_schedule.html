@@ -2,9 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
+    {% block main_layout %}
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Lista zajęć</h2>
+            {% block menu %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/schedules">Lista harmonogramów zajęć</a></li>
+                    <li><a href="/list">Powrót do spisu</a></li>
+                </ul>
+                </div>
+            </nav>
+            {% endblock menu %}
+        </div>
+    </div>
+    {% endblock %}
+    {% block table %}
+    <div class="container">
+    <h2>Lista zajęć</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Id harmonogramu</th>
+        <th>Nazwa zajęć</th>
+        <th>Czas zajęć</th>
+        <th>Nazwa miejsca</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for schedule in schedules %}
+        <tr>
+          <td>{{schedule.id}}</td>
+          <td>{{schedule.workshop.name}}</td>
+          <td>{{schedule.time}}</td>
+          <td>{{schedule.place}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    {% endblock %}
 </body>
 </html>

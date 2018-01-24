@@ -36,11 +36,12 @@ urlpatterns = [
 
     url(r'^admin', admin.site.urls, name='admin_panel'),
     url(r'^main', views.main, name="main" ),
+    url('list', views.list, name='list'),
     url('menu', Users_Display.as_view()),
     url(r'^students', views.users_students  ),
     url(r'^teachers', views.users_teachers  ),
     url(r'^workshop', views.workshop  ),
-    url(r'^menu/workshop_schedules', views.workshop_schedule  ),
+    url('schedules', views.workshop_schedule  ),
 
     url(r'^accounts/', include('django.contrib.auth.urls') )
 

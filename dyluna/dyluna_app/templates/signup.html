@@ -1,6 +1,17 @@
-{% extends 'base_generic.html' %}
+{% extends 'users.html' %}
 
-{% block content %}
+{% block menu %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a href="/main">Powrót do głównego menu</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock menu %}
+
+{% block table %}
+  <div class="container">
   <h2>Zarejestruj się</h2>
   <form method="post">
     {% csrf_token %}
@@ -8,9 +19,6 @@
       <p>
         {{ field.label_tag }}<br>
         {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}
@@ -18,9 +26,10 @@
     {% endfor %}
     <button type="submit">Zarejestruj się</button>
   </form>
+    <br />
     <p id="strength-status">Moc haseł: ??</p>
     <p id="validate-status">Zgodność haseł: ??</p>
-
+  </div>
 
 <script>
     $(document).ready(function() {

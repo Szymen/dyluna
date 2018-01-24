@@ -53,7 +53,7 @@ class Type(models.Model): # czego to Type? :D TODO: zmienic nazwe na Workshop_Ty
 class Workshop_Schedule(models.Model):
     id = models.AutoField(primary_key=True)
     workshop = models.ForeignKey('Workshop', on_delete="CASCADE")
-    time = models.DateTimeField()
+    workshop_time = models.DateTimeField()
     places = models.ManyToManyField('Place')
 
 class Equipment(models.Model):

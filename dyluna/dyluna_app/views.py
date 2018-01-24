@@ -1,11 +1,15 @@
 from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponse
 from django.views import View
-from .models.models import User, Workshop
+from .models.models import User, Workshop, Workshop_Schedule
 from .forms.forms import DietForm, UserForm, WorkshopForm
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+import logging
+import MySQLdb
+
+db_logger = logging.getLogger('db')
 
 
 from django.contrib.auth.decorators import login_required
@@ -31,6 +35,10 @@ def diet_new(request):
 @login_required
 def main(request):
     return render(request, 'main.html')
+
+@login_required
+def list(request):
+    return render(request, 'list_template.html')
 
 
 class Users_Display(View):
@@ -79,13 +87,30 @@ def users_teachers(request):
 
 @login_required
 def workshop(request):
+    try:
+        1/0
+    except Exception as e:
+        db_logger.exception(e)
     return render(request, 'workshop.html', {
         'workshops': Workshop.objects.all()
     })
 
 @login_required
 def workshop_schedule(request):
-    return HttpResponse("Workshop Schedules")
+    print (Workshop_Schedule.objects.all())
+    db = MySQLdb.connect(host="localhost", user="dyluna",
+                        passwd="haslo123", db="dyluna")
+    cr = db.cursor()
+    data = cr.execute('''SELECT sch.id, sch.workshop_time, sch.workshop_id, pl.name FROM dyluna_app_workshop_schedule AS sch 
+        INNER JOIN dyluna_app_workshop_schedule_places AS schpl ON sch.id = schpl.workshop_schedule_id 
+        INNER JOIN dyluna_app_place AS pl ON schpl.id = pl.id''')
+    #data = cr.fetchall()
+    print ("NANANANANANANANANANANANANANA\n\n\n\n\n")
+    print (data)
+    #print (data)
+    return render(request, 'workshop_schedule.html', {
+        'schedules': data
+    })
 
 
 def signup(request):
@@ -113,4 +138,4 @@ def new_workshop(request):
             # return redirect('diet_detail', pk=diet.pk)
     else:
         form = WorkshopForm()
-    return render(request, 'templates/form_template.html', {'form': form, 'name':"Zajęcia"})
+    return render(request, 'form_template.html', {'form': form, 'name':"Zajęcia"})
